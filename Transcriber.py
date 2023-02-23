@@ -6,6 +6,10 @@ from pathlib import Path
 from multiprocessing import Pool
 import openai
 
+api_key = os.environ.get('OPENAI_API_KEY')
+
+openai.api_key = api_key
+
 
 def transcribe(song):
     model = whisper.load_model("small.en")
