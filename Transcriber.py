@@ -5,7 +5,6 @@ import multiprocessing
 from pathlib import Path
 from multiprocessing import Pool
 import openai
-openai.api_key = "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"
 
 
 def transcribe(song):
