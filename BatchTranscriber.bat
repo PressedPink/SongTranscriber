@@ -1,21 +1,5 @@
-@echo off
+set current_dir=%cd%
 
-set env_path = .\env
-set venv_path = .\venv
+start /w /b wt -d %current_dir% pwsh -NoExit -c ".\env\Scripts\activate && python ./Splitter.py"
 
-
-set /p playlist_link="Enter the URL of the YouTube playlist: "
-
-py -m yt-dlp -x --embed-thumbnail --audio-format mp3 -o "%(title)s.%(ext)s" "%playlist_link%"
-
-call %env_path%\Scripts\activate.bat
-
-python .\Splitter.py
-
-call %env_path%\Scripts\deactivate.bat
-
-call %venv_path%\Scripts\activate.bat
-
-python .\Transcriber.py
-
-call %venv_path%\Scripts\deactivate.bat
+start /w /b wt -d %current_dir% pwsh -NoExit -c ".\venv\Scripts\activate && python ./Transcriber.py"

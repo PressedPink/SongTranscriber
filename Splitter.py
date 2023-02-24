@@ -12,7 +12,11 @@ def spleeterCall(song):
 
 if __name__ == '__main__':
 
-    songs = glob.glob('*.mp3')
+    playlist_url = input()
+
+    subprocess.call(f'yt-dlp -x --embed-thumbnail --audio-format mp3 -P ./input -o "%(title)s.%(ext)s" "{playlist_url}"', shell=True)
+
+    songs = glob.glob('./input/*.mp3')
     new_song_names = []
     for song in songs:
         new_name = song.replace(" ", "_")

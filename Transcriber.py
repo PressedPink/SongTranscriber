@@ -43,7 +43,7 @@ def transcribe(song):
 
 if __name__ == '__main__':
 
-    new_song_names = glob.glob('*.mp3')
+    new_song_names = glob.glob('./output/*.mp3')
 
     pool = multiprocessing.Pool(processes=10)
     r = pool.map_async(transcribe, new_song_names)
