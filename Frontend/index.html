@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Youtube Song Transcriber</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div id = "circleWrapper">
+        <div id = "circle"> </div>
+        <img src="Logo.png" alt="My Logo">
+        <div id = "title">Song Transcriber</div>
+    </div>
+	<form id="youtube-link-form">
+		<label for="youtube-link">YouTube Link:</label>
+		<input type="text" id="youtube-link" name="youtube-link">
+        <div>
+		    <button type="submit">Submit</button>
+        </div>
+	</form>
+
+	<script>
+		// add event listener to form submission
+		document.getElementById("youtube-link-form").addEventListener("submit", function(event) {
+			// prevent the form from submitting normally
+			event.preventDefault();
+
+			// get the youtube link value from the input
+			const youtubeLink = document.getElementById("youtube-link").value;
+
+			// make the POST request to the backend
+			fetch("http://127.0.0.1:5000/SongTranscriber", {
+				method: "POST",
+				body: JSON.stringify({ link: youtubeLink }),
+				headers: { "Content-Type": "application/json" }
+			})
+			.then(response => response.json())
+			.then(data => console.log(data))
+			.catch(error => console.error(error));
+		});
+	</script>
+</body>
+</html>
