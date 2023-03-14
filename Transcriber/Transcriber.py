@@ -19,7 +19,7 @@ def transcribe(song):
 
     model_engine = "text-davinci-003"
 
-    songPrompt = "Can you format this text like lyrics? Try to split into verses and choruses, where a chorus is lines that get repeated."
+    songPrompt = "Can you formot the following text like the lyrics from Genius.com?: "
     
     result = model.transcribe(song)
     formattedTranscribe = ""
