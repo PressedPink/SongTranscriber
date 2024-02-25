@@ -1,14 +1,8 @@
 from multiprocessing import Process
-from multiprocessing import Pool
 import subprocess
-from flask import Flask
-from flask import request
-import json
-from flask import jsonify
-import sys
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 import socket
-import time
 
 
 def downAndOut(linkJson):
@@ -32,10 +26,17 @@ if __name__ == '__main__':
         resp = jsonify(success=True)
         Process(target=downAndOut, args=(linkJson,)).start()
 
+        HOST = "127.0.0.1"  # Standard loopback interface address (localhost)
+        PORT = 9998  # Port to listen on (non-privileged ports are > 1023)
+
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.bind((HOST, PORT))
+            s.listen()
+            conn, addr = s.accept()
+            with conn:
+                while True:
+                    conn.sendall(bytes(" ", "utf-8"))
         return resp
-        #json.dumps(linkJson)
-    #Function for song transcriber
-    #POST request
 
 
     @app.route("/Status", methods=['GET'])
